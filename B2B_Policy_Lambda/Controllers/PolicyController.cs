@@ -1,5 +1,7 @@
-﻿using B2B_Policy_Lambda.Models;
-using B2B_Policy_Lambda.Services;
+﻿using B2B_Policy_Lambda.Dto.Commands.AddPolicy;
+using B2B_Policy_Lambda.Dto.Commands.RemovePolicy;
+using B2B_Policy_Lambda.Dto.Queries.GetPolicies;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -9,29 +11,31 @@ namespace B2B_Policy_Lambda.Controllers
     [ApiController]
     public class PolicyController : ControllerBase
     {
-        private readonly IPolicyService _policyService;
-        public PolicyController(IPolicyService policyService)
+        protected readonly IMediator _mediator;
+
+        public PolicyController(IMediator mediator)
         {
-            _policyService = policyService ?? throw new ArgumentNullException(nameof(policyService));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
+
         [HttpGet]
         public IActionResult GetPolicies()
         {
-            var result = _policyService.GetPolicies();
-            return Ok(result);
+            var result = _mediator.Send(new GetPoliciesRequest());
+            return Ok(result.Result);
         }
 
         [HttpPost]
-        public IActionResult AddPolicy([FromBody] PolicyModel policy)
+        public IActionResult AddPolicy([FromBody] AddPolicyRequest request)
         {
-            _policyService.AddPolicy(policy);
+            _mediator.Send(request);
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult RemovePolicy([FromBody] PolicyModel policy)
+        public IActionResult RemovePolicy([FromBody] RemovePolicyRequest request)
         {
-            _policyService.RemovePolicy(policy);
+            _mediator.Send(request);
             return Ok();
         }
     }

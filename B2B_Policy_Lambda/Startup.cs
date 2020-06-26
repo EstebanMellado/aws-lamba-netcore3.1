@@ -1,4 +1,6 @@
+using B2B_Policy_Lambda.Mapper;
 using B2B_Policy_Lambda.Services;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +25,10 @@ namespace B2B_Policy_Lambda
         {
             services.AddControllers();
 
-            // Add S3 to the ASP.NET Core dependency injection framework.
+            services.AddMediatR(typeof(Startup).Assembly);
+            
+            services.AddMapperServices();
+
             services.AddAWSService<Amazon.S3.IAmazonS3>();
 
             services.AddSingleton<IPolicyService, PolicyService>();
