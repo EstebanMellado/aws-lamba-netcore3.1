@@ -4,7 +4,7 @@ namespace B2B_Policy_Lambda.Dto.Queries.GetPolicies
 {
     public class GetPoliciesResponse
     {
-        public IList<PolicyDto> PoliciesDto { get; set; }
+        public IList<PolicyDto> Policies { get; set; }
     }
 
     public class PolicyDto
