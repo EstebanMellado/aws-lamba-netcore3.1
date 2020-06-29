@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:56473/",
-      "sslPort": 44378
+      "applicationUrl": "http://localhost:57198/",
+      "sslPort": 44374
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "B2BPolicyLambda.Api": {
+    "B2B_Policy_Lambda.Tests": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
